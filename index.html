@@ -7,15 +7,15 @@
   <meta name="description" content="Blog de l'assignatura EA (G1), Quadrimestre de Primavera, Curs 2025-26 — EETAC UPC." />
   <style>
     :root{
-      --bg:#0b1220;
-      --card:#101a2e;
-      --card2:#0f1930;
-      --text:#e8eefc;
-      --muted:#a8b3d6;
-      --line:rgba(232,238,252,.12);
-      --accent:#7aa7ff;
-      --accent2:#8bffcf;
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --bg:#f6f8ff;
+      --card:#ffffff;
+      --card2:#ffffff;
+      --text:#0b1220;
+      --muted:#3a4466;
+      --line:rgba(11,18,32,.12);
+      --accent:#2f66ff;
+      --accent2:#0ea57a;
+      --shadow: 0 12px 30px rgba(15,25,48,.10);
       --radius: 18px;
       --max: 1080px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -28,9 +28,9 @@
       font-family:var(--sans);
       color:var(--text);
       background:
-        radial-gradient(1200px 700px at 20% -10%, rgba(122,167,255,.25), transparent 60%),
-        radial-gradient(900px 600px at 90% 10%, rgba(139,255,207,.18), transparent 55%),
-        radial-gradient(900px 900px at 40% 120%, rgba(122,167,255,.15), transparent 60%),
+        radial-gradient(1100px 650px at 15% -10%, rgba(47,102,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 95% 10%, rgba(14,165,122,.14), transparent 55%),
+        radial-gradient(900px 900px at 40% 120%, rgba(47,102,255,.10), transparent 60%),
         var(--bg);
       line-height:1.55;
     }
@@ -39,7 +39,7 @@
     header{
       display:flex; align-items:flex-start; justify-content:space-between; gap:18px;
       padding:22px 20px; border:1px solid var(--line);
-      border-radius:var(--radius); background:linear-gradient(180deg, rgba(16,26,46,.92), rgba(16,26,46,.55));
+      border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
       box-shadow:var(--shadow); backdrop-filter: blur(10px);
     }
     .brand{display:flex; flex-direction:column; gap:8px}
@@ -53,7 +53,7 @@
       padding:9px 12px;
       border:1px solid var(--line);
       border-radius:999px;
-      background:rgba(15,25,48,.6);
+      background:rgba(255,255,255,.75);
       color:var(--muted);
       font-size:13px;
       text-decoration:none;
@@ -61,7 +61,7 @@
       cursor:pointer;
     }
     .pill strong{color:var(--text); font-weight:650}
-    .pill:focus{outline:2px solid rgba(122,167,255,.55); outline-offset:2px}
+    .pill:focus{outline:2px solid rgba(47,102,255,.35); outline-offset:2px}
     .grid{
       display:grid;
       grid-template-columns: 1.35fr .65fr;
@@ -76,14 +76,14 @@
     main, aside{
       border:1px solid var(--line);
       border-radius:var(--radius);
-      background:rgba(16,26,46,.55);
+      background:rgba(255,255,255,.78);
       box-shadow:var(--shadow);
       overflow:hidden;
     }
     .section{
       padding:18px 18px 14px 18px;
       border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(16,26,46,.85), rgba(16,26,46,.50));
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.72));
     }
     .section h2{margin:0; font-size:16px; letter-spacing:.2px}
     .content{padding:16px 18px}
@@ -91,14 +91,14 @@
       display:flex; gap:10px; flex-wrap:wrap; align-items:center;
       padding:14px 18px;
       border-bottom:1px solid var(--line);
-      background:rgba(15,25,48,.55);
+      background:rgba(255,255,255,.80);
     }
     .field{
       display:flex; align-items:center; gap:10px;
       padding:10px 12px;
       border:1px solid var(--line);
       border-radius:12px;
-      background:rgba(11,18,32,.55);
+      background:rgba(255,255,255,.88);
       flex:1;
       min-width:220px;
     }
@@ -112,7 +112,7 @@
     }
     .btn{
       border:1px solid var(--line);
-      background:rgba(11,18,32,.45);
+      background:rgba(255,255,255,.82);
       color:var(--text);
       padding:10px 12px;
       border-radius:12px;
@@ -120,7 +120,7 @@
       font-size:14px;
       user-select:none;
     }
-    .btn:hover{border-color: rgba(122,167,255,.4)}
+    .btn:hover{border-color: rgba(47,102,255,.25)}
     .meta-row{
       display:flex; align-items:center; justify-content:space-between; gap:12px;
       color:var(--muted); font-size:13px;
@@ -131,7 +131,7 @@
     .post{
       padding:16px 18px;
       border-bottom:1px solid var(--line);
-      background:rgba(16,26,46,.35);
+      background:rgba(255,255,255,.70);
     }
     .post:last-child{border-bottom:0}
     .post h3{margin:0 0 6px 0; font-size:18px}
@@ -145,7 +145,7 @@
       padding:4px 9px;
       border-radius:999px;
       border:1px solid var(--line);
-      background:rgba(15,25,48,.55);
+      background:rgba(255,255,255,.85);
       color:var(--muted);
       font-size:12px;
       cursor:pointer;
@@ -154,10 +154,10 @@
     }
     .tag.active{
       color:var(--text);
-      border-color: rgba(139,255,207,.55);
-      background: rgba(139,255,207,.12);
+      border-color: rgba(14,165,122,.45);
+      background: rgba(14,165,122,.10);
     }
-    .excerpt{margin:0; color:rgba(232,238,252,.92)}
+    .excerpt{margin:0; color:rgba(11,18,32,.92)}
     .read{
       margin-top:12px;
       display:inline-flex;
@@ -169,9 +169,9 @@
       padding:9px 12px;
       border-radius:12px;
       border:1px solid var(--line);
-      background:rgba(11,18,32,.35);
+      background:rgba(255,255,255,.82);
     }
-    .read:hover{border-color: rgba(122,167,255,.45)}
+    .read:hover{border-color: rgba(47,102,255,.30)}
     .panel{
       padding:16px 18px;
       border-bottom:1px solid var(--line);
@@ -184,7 +184,7 @@
       padding:12px 12px;
       border:1px solid var(--line);
       border-radius:14px;
-      background:rgba(15,25,48,.45);
+      background:rgba(255,255,255,.86);
       text-decoration:none;
     }
     .item strong{font-size:14px}
@@ -201,17 +201,17 @@
       width:min(760px, calc(100% - 24px));
       border:1px solid var(--line);
       border-radius:20px;
-      background:rgba(16,26,46,.96);
+      background:rgba(255,255,255,.96);
       color:var(--text);
       box-shadow:var(--shadow);
       padding:0;
     }
-    dialog::backdrop{background:rgba(0,0,0,.55)}
+    dialog::backdrop{background:rgba(0,0,0,.35)}
     .modal-head{
       display:flex; justify-content:space-between; align-items:center; gap:10px;
       padding:14px 16px;
       border-bottom:1px solid var(--line);
-      background:rgba(15,25,48,.6);
+      background:rgba(255,255,255,.92);
     }
     .modal-head strong{font-size:14px}
     .modal-body{padding:14px 16px}
@@ -380,8 +380,8 @@
       $$("#tags .item").forEach(a=>{
         const t = a.getAttribute("data-tag") || "";
         if((state.tag||"") === t){
-          a.style.borderColor = "rgba(139,255,207,.55)";
-          a.style.background = "rgba(139,255,207,.12)";
+          a.style.borderColor = "rgba(14,165,122,.45)";
+          a.style.background = "rgba(14,165,122,.10)";
         }
       });
     }
@@ -415,6 +415,7 @@
       $("#estatTag").textContent = state.tag ? state.tag : "totes";
       $("#estatQ").textContent = state.q ? `“${state.q}”` : "—";
       $("#comptador").textContent = `${filtered.length} ${filtered.length === 1 ? "entrada" : "entrades"}`;
+
       $$("#posts .tag").forEach(el=>{
         const t = el.getAttribute("data-tag") || "";
         if((state.tag||"") === t) el.classList.add("active");
