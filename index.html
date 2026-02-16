@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog assignatura EA - G1 - Quadrimestre de Primavera Curs 2025-26</title>
+  <meta name="description" content="Blog de l'assignatura EA (G1), Quadrimestre de Primavera, Curs 2025-26 — EETAC UPC." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#101a2e;
+      --card2:#0f1930;
+      --text:#e8eefc;
+      --muted:#a8b3d6;
+      --line:rgba(232,238,252,.12);
+      --accent:#7aa7ff;
+      --accent2:#8bffcf;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1080px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(122,167,255,.25), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(139,255,207,.18), transparent 55%),
+        radial-gradient(900px 900px at 40% 120%, rgba(122,167,255,.15), transparent 60%),
+        var(--bg);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    header{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:18px;
+      padding:22px 20px; border:1px solid var(--line);
+      border-radius:var(--radius); background:linear-gradient(180deg, rgba(16,26,46,.92), rgba(16,26,46,.55));
+      box-shadow:var(--shadow); backdrop-filter: blur(10px);
+    }
+    .brand{display:flex; flex-direction:column; gap:8px}
+    .brand h1{margin:0; font-size:22px; letter-spacing:.2px}
+    .brand p{margin:0; color:var(--muted); max-width:70ch}
+    nav{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:9px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(15,25,48,.6);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      user-select:none;
+      cursor:pointer;
+    }
+    .pill strong{color:var(--text); font-weight:650}
+    .pill:focus{outline:2px solid rgba(122,167,255,.55); outline-offset:2px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns:1fr}
+      header{flex-direction:column}
+      nav{justify-content:flex-start}
+    }
+    main, aside{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(16,26,46,.55);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .section{
+      padding:18px 18px 14px 18px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(16,26,46,.85), rgba(16,26,46,.50));
+    }
+    .section h2{margin:0; font-size:16px; letter-spacing:.2px}
+    .content{padding:16px 18px}
+    .search{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      padding:14px 18px;
+      border-bottom:1px solid var(--line);
+      background:rgba(15,25,48,.55);
+    }
+    .field{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(11,18,32,.55);
+      flex:1;
+      min-width:220px;
+    }
+    .field input{
+      width:100%;
+      border:0;
+      outline:0;
+      background:transparent;
+      color:var(--text);
+      font-size:14px;
+    }
+    .btn{
+      border:1px solid var(--line);
+      background:rgba(11,18,32,.45);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:14px;
+      user-select:none;
+    }
+    .btn:hover{border-color: rgba(122,167,255,.4)}
+    .meta-row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      color:var(--muted); font-size:13px;
+      padding:0 18px 14px 18px;
+      border-bottom:1px solid var(--line);
+    }
+    .count{font-family:var(--mono); font-size:12px}
+    .post{
+      padding:16px 18px;
+      border-bottom:1px solid var(--line);
+      background:rgba(16,26,46,.35);
+    }
+    .post:last-child{border-bottom:0}
+    .post h3{margin:0 0 6px 0; font-size:18px}
+    .post .sub{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+      color:var(--muted); font-size:13px;
+      margin-bottom:10px;
+    }
+    .tag{
+      display:inline-flex; align-items:center;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(15,25,48,.55);
+      color:var(--muted);
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+      text-decoration:none;
+    }
+    .tag.active{
+      color:var(--text);
+      border-color: rgba(139,255,207,.55);
+      background: rgba(139,255,207,.12);
+    }
+    .excerpt{margin:0; color:rgba(232,238,252,.92)}
+    .read{
+      margin-top:12px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      text-decoration:none;
+      color:var(--text);
+      font-size:14px;
+      padding:9px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(11,18,32,.35);
+    }
+    .read:hover{border-color: rgba(122,167,255,.45)}
+    .panel{
+      padding:16px 18px;
+      border-bottom:1px solid var(--line);
+    }
+    .panel:last-child{border-bottom:0}
+    .panel h3{margin:0 0 10px 0; font-size:14px; color:var(--muted); font-weight:650}
+    .list{display:flex; flex-direction:column; gap:10px}
+    .item{
+      display:flex; flex-direction:column; gap:4px;
+      padding:12px 12px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(15,25,48,.45);
+      text-decoration:none;
+    }
+    .item strong{font-size:14px}
+    .item span{color:var(--muted); font-size:12px}
+    .footer{
+      margin:18px 0 0 0;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      padding:18px 12px;
+      border-top:1px solid var(--line);
+    }
+    dialog{
+      width:min(760px, calc(100% - 24px));
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:rgba(16,26,46,.96);
+      color:var(--text);
+      box-shadow:var(--shadow);
+      padding:0;
+    }
+    dialog::backdrop{background:rgba(0,0,0,.55)}
+    .modal-head{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      background:rgba(15,25,48,.6);
+    }
+    .modal-head strong{font-size:14px}
+    .modal-body{padding:14px 16px}
+    .modal-body h3{margin:0 0 8px 0; font-size:18px}
+    .modal-sub{color:var(--muted); font-size:13px; margin:0 0 12px 0; display:flex; gap:10px; flex-wrap:wrap}
+    .modal-actions{display:flex; justify-content:flex-end; gap:10px; padding:14px 16px; border-top:1px solid var(--line)}
+    .prose p{margin:0 0 12px 0}
+    .prose p:last-child{margin-bottom:0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1>Blog assignatura EA - G1 - Quadrimestre de Primavera Curs 2025-26</h1>
+        <p><strong>EETAC · UPC</strong> — Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      <nav aria-label="Navegació principal">
+        <a class="pill" href="#inici"><strong>Inici</strong></a>
+        <a class="pill" href="#arxiu"><strong>Arxiu</strong></a>
+        <a class="pill" href="#sobre"><strong>Sobre</strong></a>
+      </nav>
+    </header>
+
+    <div class="grid" id="inici">
+      <main>
+        <div class="search" role="search">
+          <div class="field" aria-label="Cerca">
+            <span aria-hidden="true">🔎</span>
+            <input id="q" type="text" placeholder="Cerca entrades…" autocomplete="off" />
+          </div>
+          <button class="btn" id="btnNeteja" type="button">Neteja</button>
+        </div>
+
+        <div class="meta-row">
+          <div id="estat">Etiqueta: <span id="estatTag">totes</span> · Cerca: <span id="estatQ">—</span></div>
+          <div class="count" id="comptador">0 entrades</div>
+        </div>
+
+        <section id="posts" aria-live="polite"></section>
+      </main>
+
+      <aside>
+        <div class="section">
+          <h2>Informació</h2>
+        </div>
+
+        <div class="panel" id="sobre">
+          <h3>Sobre el blog</h3>
+          <div class="list">
+            <div class="item" role="group" aria-label="Descripció">
+              <strong>EETAC · UPC</strong>
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Etiquetes</h3>
+          <div class="list" id="tags"></div>
+        </div>
+
+        <div class="panel" id="arxiu">
+          <h3>Arxiu</h3>
+          <div class="list" id="arxiuList"></div>
+        </div>
+
+        <div class="footer">
+          <div>© <span id="any"></span> · EETAC UPC</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <dialog id="dlgPost" aria-label="Entrada del blog">
+    <div class="modal-head">
+      <strong>Entrada</strong>
+      <button class="btn" id="btnTanca" type="button">Tanca</button>
+    </div>
+    <div class="modal-body">
+      <h3 id="dlgTitol">Lorem ipsum</h3>
+      <p class="modal-sub">
+        <span id="dlgData">—</span>
+        <span id="dlgTags">—</span>
+      </p>
+      <div class="prose" id="dlgText"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="btnEnrere" type="button">Enrere</button>
+    </div>
+  </dialog>
+
+  <script>
+    const $ = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+
+    let posts = [];
+    let state = { q:"", tag:"" };
+
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function formatDate(iso){
+      if(!iso) return "";
+      const d = new Date(iso + "T00:00:00");
+      return new Intl.DateTimeFormat("ca-ES", { year:"numeric", month:"long", day:"numeric" }).format(d);
+    }
+
+    function uniqueTags(list){
+      const set = new Set();
+      list.forEach(p => (p.etiquetes||[]).forEach(t => set.add(String(t).trim().toLowerCase())));
+      return Array.from(set).filter(Boolean).sort((a,b)=>a.localeCompare(b, "ca"));
+    }
+
+    function applyFilters(list){
+      const q = (state.q || "").trim().toLowerCase();
+      const tag = (state.tag || "").trim().toLowerCase();
+
+      return list.filter(p=>{
+        const inTag = !tag || (p.etiquetes||[]).some(t => String(t).toLowerCase() === tag);
+        if(!inTag) return false;
+        if(!q) return true;
+        const hay = (p.titol + " " + (p.text||[]).join(" ") + " " + (p.etiquetes||[]).join(" ")).toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    function renderPostCard(p){
+      const tags = (p.etiquetes||[]).map(t => `<a class="tag" data-tag="${escapeHtml(t)}" href="#">${escapeHtml(t)}</a>`).join(" ");
+      const excerptRaw = (p.text||[]).join(" ");
+      const excerpt = excerptRaw.length > 220 ? excerptRaw.slice(0, 220).trim() + "…" : excerptRaw;
+      return `
+        <article class="post" data-id="${escapeHtml(p.id)}">
+          <h3>${escapeHtml(p.titol)}</h3>
+          <div class="sub">
+            <span>📅 ${escapeHtml(formatDate(p.data))}</span>
+            <span aria-label="Etiquetes">🏷️ ${tags || `<span class="tag" style="cursor:default;">sense etiqueta</span>`}</span>
+          </div>
+          <p class="excerpt">${escapeHtml(excerpt)}</p>
+          <a class="read" href="#" data-open="${escapeHtml(p.id)}">Llegeix-ho sencer →</a>
+        </article>
+      `;
+    }
+
+    function renderTags(tagList){
+      const all = `
+        <a class="item" href="#" data-tag="">
+          <strong>Totes</strong>
+          <span>Lorem ipsum dolor sit amet.</span>
+        </a>
+      `;
+      const rest = tagList.map(t => `
+        <a class="item" href="#" data-tag="${escapeHtml(t)}">
+          <strong>${escapeHtml(t)}</strong>
+          <span>Lorem ipsum dolor sit amet.</span>
+        </a>
+      `).join("");
+      $("#tags").innerHTML = all + rest;
+
+      $$("#tags .item").forEach(a=>{
+        const t = a.getAttribute("data-tag") || "";
+        if((state.tag||"") === t){
+          a.style.borderColor = "rgba(139,255,207,.55)";
+          a.style.background = "rgba(139,255,207,.12)";
+        }
+      });
+    }
+
+    function renderArxiu(list){
+      const items = list.map(p => `
+        <a class="item" href="#" data-open="${escapeHtml(p.id)}">
+          <strong>${escapeHtml(p.titol)}</strong>
+          <span>${escapeHtml(formatDate(p.data))} · ${escapeHtml((p.etiquetes||[]).slice(0,3).join(", "))}</span>
+        </a>
+      `).join("");
+      $("#arxiuList").innerHTML = items || `
+        <div class="item">
+          <strong>Lorem ipsum</strong>
+          <span>Lorem ipsum dolor sit amet.</span>
+        </div>
+      `;
+    }
+
+    function draw(){
+      const filtered = applyFilters(posts);
+      $("#posts").innerHTML = filtered.map(renderPostCard).join("") || `
+        <div class="content">
+          <p style="margin:0; color:var(--muted)">No s’ha trobat cap entrada amb aquests filtres.</p>
+        </div>
+      `;
+
+      renderTags(uniqueTags(posts));
+      renderArxiu(posts);
+
+      $("#estatTag").textContent = state.tag ? state.tag : "totes";
+      $("#estatQ").textContent = state.q ? `“${state.q}”` : "—";
+      $("#comptador").textContent = `${filtered.length} ${filtered.length === 1 ? "entrada" : "entrades"}`;
+      $$("#posts .tag").forEach(el=>{
+        const t = el.getAttribute("data-tag") || "";
+        if((state.tag||"") === t) el.classList.add("active");
+      });
+    }
+
+    function openPost(id){
+      const p = posts.find(x => x.id === id);
+      if(!p) return;
+      $("#dlgTitol").textContent = p.titol;
+      $("#dlgData").textContent = `📅 ${formatDate(p.data)}`;
+      $("#dlgTags").textContent = `🏷️ ${(p.etiquetes||[]).join(", ") || "—"}`;
+      $("#dlgText").innerHTML = (p.text||[]).map(par => `<p>${escapeHtml(par)}</p>`).join("");
+      $("#dlgPost").showModal();
+      $("#btnTanca").focus();
+    }
+
+    async function loadPosts(){
+      const res = await fetch("./posts.json", { cache: "no-store" });
+      if(!res.ok) throw new Error("No s'ha pogut carregar posts.json");
+      const data = await res.json();
+      posts = Array.isArray(data) ? data.slice() : [];
+      posts.sort((a,b)=> (String(b.data||"")).localeCompare(String(a.data||"")));
+      draw();
+    }
+
+    $("#any").textContent = new Date().getFullYear();
+
+    $("#q").addEventListener("input", (e)=>{ state.q = e.target.value; draw(); });
+    $("#btnNeteja").addEventListener("click", ()=>{ state.q=""; state.tag=""; $("#q").value=""; draw(); });
+
+    $("#posts").addEventListener("click", (e)=>{
+      const tagEl = e.target.closest(".tag");
+      if(tagEl){
+        e.preventDefault();
+        state.tag = tagEl.getAttribute("data-tag") || "";
+        draw();
+        return;
+      }
+      const openEl = e.target.closest("[data-open]");
+      if(openEl){
+        e.preventDefault();
+        openPost(openEl.getAttribute("data-open"));
+      }
+    });
+
+    $("#tags").addEventListener("click", (e)=>{
+      const el = e.target.closest("[data-tag]");
+      if(!el) return;
+      e.preventDefault();
+      state.tag = el.getAttribute("data-tag") || "";
+      draw();
+    });
+
+    $("#arxiuList").addEventListener("click", (e)=>{
+      const el = e.target.closest("[data-open]");
+      if(!el) return;
+      e.preventDefault();
+      openPost(el.getAttribute("data-open"));
+    });
+
+    $("#btnTanca").addEventListener("click", ()=> $("#dlgPost").close());
+    $("#btnEnrere").addEventListener("click", ()=> $("#dlgPost").close());
+
+    loadPosts().catch(()=>{
+      $("#posts").innerHTML = `
+        <div class="content">
+          <p style="margin:0; color:var(--muted)">Error: no s'han pogut carregar les entrades. Assegura't que <span style="font-family:var(--mono)">posts.json</span> és a la mateixa carpeta i que s'està servint amb un servidor web.</p>
+        </div>
+      `;
+      $("#comptador").textContent = "0 entrades";
+      $("#tags").innerHTML = `
+        <div class="item">
+          <strong>Lorem ipsum</strong>
+          <span>Lorem ipsum dolor sit amet.</span>
+        </div>
+      `;
+      $("#arxiuList").innerHTML = `
+        <div class="item">
+          <strong>Lorem ipsum</strong>
+          <span>Lorem ipsum dolor sit amet.</span>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
