@@ -1,43 +1,11 @@
 [
   {
     "id": "p1",
-    "titol": "Lorem ipsum dolor sit amet",
+    "titol": "Presentació G1 - EA",
     "data": "2026-02-16",
-    "etiquetes": ["ea", "g1"],
+    "etiquetes": ["presentació", "grup"],
     "text": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-    ]
-  },
-  {
-    "id": "p2",
-    "titol": "Sed ut perspiciatis unde omnis",
-    "data": "2026-02-09",
-    "etiquetes": ["eetac", "upc"],
-    "text": [
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-      "Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
-    ]
-  },
-  {
-    "id": "p3",
-    "titol": "Neque porro quisquam est",
-    "data": "2026-01-27",
-    "etiquetes": ["practiques", "materials"],
-    "text": [
-      "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
-      "Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-    ]
-  },
-  {
-    "id": "p4",
-    "titol": "At vero eos et accusamus",
-    "data": "2026-01-12",
-    "etiquetes": ["avisos", "calendari"],
-    "text": [
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti.",
-      "Et harum quidem rerum facilis est et expedita distinctio."
+      "Som el Grup 1 de l’assignatura EA del quadrimestre de primavera del curs 2025-26 de l’EETAC, Escola d’Enginyeria de Telecomunicació i Aeroespacial de Castelldefels (UPC). El grup està format per Jairo López i Judit Martínez, estudiants del grau en Enginyeria Aeroespacial amb menció en Aeronavegació i Enginyeria Telemàtica; Aurora Calderón i Arnau Cepero, estudiants d’Enginyeria Telemàtica; i Joel Rojas, estudiant del grau en Enginyeria Aeroespacial amb menció en Aeroports i Enginyeria Telemàtica. Estem motivats per treballar conjuntament a l’assignatura EA i aprofitar-la per consolidar coneixements tant en l’àmbit aeroespacial com en el telemàtic, de manera similar al que ja vam fer a l’assignatura DSA, on també vam treballar plegats com a grup. Tenim interès a implicar-nos en les activitats i els projectes del curs, i a fer una feina responsable i consistent al llarg del quadrimestre. També volem aprofitar la diversitat de perfils del grup per complementar-nos i millorar el resultat del treball en equip."
     ]
   }
 ]
