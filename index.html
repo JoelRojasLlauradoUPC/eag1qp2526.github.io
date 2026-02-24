@@ -220,10 +220,47 @@
     .modal-actions{display:flex; justify-content:flex-end; gap:10px; padding:14px 16px; border-top:1px solid var(--line)}
     .prose p{margin:0 0 12px 0}
     .prose p:last-child{margin-bottom:0}
+
+    /* ==== AÑADIDO: SOPORTE IMÁGENES ==== */
+
+    .post-images{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin:12px 0;
+    }
+
+    .post-images img{
+      width:100%;
+      max-width:280px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      transition:transform .2s ease;
+    }
+
+    .post-images img:hover{
+      transform:scale(1.03);
+    }
+
+    .modal-images{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .modal-images img{
+      width:100%;
+      max-width:320px;
+      border-radius:12px;
+      border:1px solid var(--line);
+    }
+
   </style>
 </head>
 <body>
-  <div class="wrap">
+    <div class="wrap">
     <header>
       <div class="brand">
         <h1>Blog assignatura EA - G1 - Quadrimestre de Primavera Curs 2025-26</h1>
@@ -345,10 +382,22 @@
       });
     }
 
+    /* ==== MODIFICADO: SOPORTE IMÁGENES ==== */
+
     function renderPostCard(p){
-      const tags = (p.etiquetes||[]).map(t => `<a class="tag" data-tag="${escapeHtml(t)}" href="#">${escapeHtml(t)}</a>`).join(" ");
+      const tags = (p.etiquetes||[]).map(t =>
+        `<a class="tag" data-tag="${escapeHtml(t)}" href="#">${escapeHtml(t)}</a>`
+      ).join(" ");
+
       const excerptRaw = (p.text||[]).join(" ");
-      const excerpt = excerptRaw.length > 220 ? excerptRaw.slice(0, 220).trim() + "…" : excerptRaw;
+      const excerpt = excerptRaw.length > 220
+        ? excerptRaw.slice(0, 220).trim() + "…"
+        : excerptRaw;
+
+      const images = (p.imatges||[]).map(img =>
+        `<img src="resources/posts/images/${escapeHtml(img)}" alt="">`
+      ).join("");
+
       return `
         <article class="post" data-id="${escapeHtml(p.id)}">
           <h3>${escapeHtml(p.titol)}</h3>
@@ -356,10 +405,43 @@
             <span>📅 ${escapeHtml(formatDate(p.data))}</span>
             <span aria-label="Etiquetes">🏷️ ${tags || `<span class="tag" style="cursor:default;">sense etiqueta</span>`}</span>
           </div>
+
+          ${images ? `<div class="post-images">${images}</div>` : ""}
+
           <p class="excerpt">${escapeHtml(excerpt)}</p>
           <a class="read" href="#" data-open="${escapeHtml(p.id)}">Llegeix-ho sencer →</a>
         </article>
       `;
+    }
+
+    function openPost(id){
+      const p = posts.find(x => x.id === id);
+      if(!p) return;
+
+      $("#dlgTitol").textContent = p.titol;
+      $("#dlgData").textContent = `📅 ${formatDate(p.data)}`;
+      $("#dlgTags").textContent = `🏷️ ${(p.etiquetes||[]).join(", ") || "—"}`;
+
+      const images = (p.imatges||[]).map(img =>
+        `<img src="resources/posts/images/${escapeHtml(img)}" alt="">`
+      ).join("");
+
+      $("#dlgText").innerHTML = `
+        ${images ? `<div class="modal-images">${images}</div>` : ""}
+        ${(p.text||[]).map(par => `<p>${escapeHtml(par)}</p>`).join("")}
+      `;
+
+      $("#dlgPost").showModal();
+      $("#btnTanca").focus();
+    }
+
+    async function loadPosts(){
+      const res = await fetch("./posts.json", { cache: "no-store" });
+      if(!res.ok) throw new Error("No s'ha pogut carregar posts.json");
+      const data = await res.json();
+      posts = Array.isArray(data) ? data.slice() : [];
+      posts.sort((a,b)=> (String(b.data||"")).localeCompare(String(a.data||"")));
+      draw();
     }
 
     function renderTags(tagList){
@@ -376,130 +458,26 @@
         </a>
       `).join("");
       $("#tags").innerHTML = all + rest;
-
-      $$("#tags .item").forEach(a=>{
-        const t = a.getAttribute("data-tag") || "";
-        if((state.tag||"") === t){
-          a.style.borderColor = "rgba(14,165,122,.45)";
-          a.style.background = "rgba(14,165,122,.10)";
-        }
-      });
     }
 
     function renderArxiu(list){
       const items = list.map(p => `
         <a class="item" href="#" data-open="${escapeHtml(p.id)}">
           <strong>${escapeHtml(p.titol)}</strong>
-          <span>${escapeHtml(formatDate(p.data))} · ${escapeHtml((p.etiquetes||[]).slice(0,3).join(", "))}</span>
+          <span>${escapeHtml(formatDate(p.data))}</span>
         </a>
       `).join("");
-      $("#arxiuList").innerHTML = items || `
-        <div class="item">
-          <strong>Lorem ipsum</strong>
-          <span>Lorem ipsum dolor sit amet.</span>
-        </div>
-      `;
+      $("#arxiuList").innerHTML = items;
     }
 
     function draw(){
       const filtered = applyFilters(posts);
-      $("#posts").innerHTML = filtered.map(renderPostCard).join("") || `
-        <div class="content">
-          <p style="margin:0; color:var(--muted)">No s’ha trobat cap entrada amb aquests filtres.</p>
-        </div>
-      `;
-
+      $("#posts").innerHTML = filtered.map(renderPostCard).join("");
       renderTags(uniqueTags(posts));
       renderArxiu(posts);
-
-      $("#estatTag").textContent = state.tag ? state.tag : "totes";
-      $("#estatQ").textContent = state.q ? `“${state.q}”` : "—";
-      $("#comptador").textContent = `${filtered.length} ${filtered.length === 1 ? "entrada" : "entrades"}`;
-
-      $$("#posts .tag").forEach(el=>{
-        const t = el.getAttribute("data-tag") || "";
-        if((state.tag||"") === t) el.classList.add("active");
-      });
     }
 
-    function openPost(id){
-      const p = posts.find(x => x.id === id);
-      if(!p) return;
-      $("#dlgTitol").textContent = p.titol;
-      $("#dlgData").textContent = `📅 ${formatDate(p.data)}`;
-      $("#dlgTags").textContent = `🏷️ ${(p.etiquetes||[]).join(", ") || "—"}`;
-      $("#dlgText").innerHTML = (p.text||[]).map(par => `<p>${escapeHtml(par)}</p>`).join("");
-      $("#dlgPost").showModal();
-      $("#btnTanca").focus();
-    }
-
-    async function loadPosts(){
-      const res = await fetch("./posts.json", { cache: "no-store" });
-      if(!res.ok) throw new Error("No s'ha pogut carregar posts.json");
-      const data = await res.json();
-      posts = Array.isArray(data) ? data.slice() : [];
-      posts.sort((a,b)=> (String(b.data||"")).localeCompare(String(a.data||"")));
-      draw();
-    }
-
-    $("#any").textContent = new Date().getFullYear();
-
-    $("#q").addEventListener("input", (e)=>{ state.q = e.target.value; draw(); });
-    $("#btnNeteja").addEventListener("click", ()=>{ state.q=""; state.tag=""; $("#q").value=""; draw(); });
-
-    $("#posts").addEventListener("click", (e)=>{
-      const tagEl = e.target.closest(".tag");
-      if(tagEl){
-        e.preventDefault();
-        state.tag = tagEl.getAttribute("data-tag") || "";
-        draw();
-        return;
-      }
-      const openEl = e.target.closest("[data-open]");
-      if(openEl){
-        e.preventDefault();
-        openPost(openEl.getAttribute("data-open"));
-      }
-    });
-
-    $("#tags").addEventListener("click", (e)=>{
-      const el = e.target.closest("[data-tag]");
-      if(!el) return;
-      e.preventDefault();
-      state.tag = el.getAttribute("data-tag") || "";
-      draw();
-    });
-
-    $("#arxiuList").addEventListener("click", (e)=>{
-      const el = e.target.closest("[data-open]");
-      if(!el) return;
-      e.preventDefault();
-      openPost(el.getAttribute("data-open"));
-    });
-
-    $("#btnTanca").addEventListener("click", ()=> $("#dlgPost").close());
-    $("#btnEnrere").addEventListener("click", ()=> $("#dlgPost").close());
-
-    loadPosts().catch(()=>{
-      $("#posts").innerHTML = `
-        <div class="content">
-          <p style="margin:0; color:var(--muted)">Error: no s'han pogut carregar les entrades. Assegura't que <span style="font-family:var(--mono)">posts.json</span> és a la mateixa carpeta i que s'està servint amb un servidor web.</p>
-        </div>
-      `;
-      $("#comptador").textContent = "0 entrades";
-      $("#tags").innerHTML = `
-        <div class="item">
-          <strong>Lorem ipsum</strong>
-          <span>Lorem ipsum dolor sit amet.</span>
-        </div>
-      `;
-      $("#arxiuList").innerHTML = `
-        <div class="item">
-          <strong>Lorem ipsum</strong>
-          <span>Lorem ipsum dolor sit amet.</span>
-        </div>
-      `;
-    });
+    loadPosts();
   </script>
 </body>
 </html>
