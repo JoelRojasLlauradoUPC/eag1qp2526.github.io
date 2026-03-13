@@ -14,5 +14,13 @@
     "etiquetes": ["Presentació"],
     "preview": "A Dublín, en Sánchez descobreix que els free tours no són tan lliures com semblen i transforma la frustració en una solució real: Trip2Guide, una manera d'explorar la ciutat sense pressions ni peatges emocionals.",
     "url": "histories-usuari.html"
+  },
+  {
+    "id": "p3",
+    "titol": "Mockup",
+    "data": "2026-03-13",
+    "etiquetes": ["Mockup"],
+    "preview": "Presentem el mockup inicial del projecte amb l'estructura visual principal, el flux de navegació i les primeres decisions de disseny.",
+    "url": "mockup.html"
   }
 ]
