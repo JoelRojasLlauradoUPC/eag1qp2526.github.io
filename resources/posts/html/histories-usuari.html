@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Histories d'usuari | Blog EA G1</title>
+  <meta name="description" content="Definicio de les histories d'usuari del projecte." />
+  <style>
+    :root{
+      --bg:#f6f8ff;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#3a4466;
+      --line:rgba(11,18,32,.12);
+      --shadow: 0 12px 30px rgba(15,25,48,.10);
+      --radius: 18px;
+      --max: 980px;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1100px 650px at 15% -10%, rgba(47,102,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 95% 10%, rgba(14,165,122,.14), transparent 55%),
+        var(--bg);
+      line-height:1.6;
+      min-height:100vh;
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.86);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .head{
+      padding:20px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.72));
+    }
+    h1{margin:0 0 8px 0; font-size:30px; line-height:1.2}
+    .meta{color:var(--muted); font-size:14px}
+    .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .tag{
+      display:inline-flex; align-items:center;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.92);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .content{padding:20px}
+    p{margin:0 0 14px 0}
+    p:last-child{margin-bottom:0}
+    .back{
+      margin-top:16px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,.9);
+      color:var(--text);
+      text-decoration:none;
+      font-size:14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="card">
+      <header class="head">
+        <h1>Histories d'usuari</h1>
+        <p class="meta">Data: 13 de marc de 2026</p>
+        <div class="tags">
+          <span class="tag">analisi</span>
+          <span class="tag">histories d'usuari</span>
+          <span class="tag">planificacio</span>
+        </div>
+      </header>
+
+      <div class="content">
+        <p>En aquesta entrada hem definit les principals histories d'usuari que guiaran el desenvolupament del projecte.</p>
+        <p>Com a objectiu, volem que cada funcionalitat respongui a una necessitat real de l'usuari final i que sigui facil de validar.</p>
+        <p>Les histories inclouen el rol, la necessitat i el valor aportat, de manera que puguem prioritzar el backlog amb criteris clars.</p>
+
+        <a class="back" href="../../../index.html">Tornar al blog</a>
+      </div>
+    </article>
+  </div>
+</body>
+</html>

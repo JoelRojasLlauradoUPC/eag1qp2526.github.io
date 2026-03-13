@@ -4,11 +4,26 @@
     "titol": "Presentació G1 - EA",
     "data": "2026-02-16",
     "etiquetes": ["presentació", "grup"],
+    "preview": "Som el Grup 1 de l’assignatura EA del quadrimestre de primavera...",
     "text": [
-      "Som el Grup 1 de l’assignatura EA del quadrimestre de primavera del curs 2025-26 de l’EETAC, Escola d’Enginyeria de Telecomunicació i Aeroespacial de Castelldefels (UPC). El grup està format per Jairo López i Judit Martínez, estudiants del grau en Enginyeria Aeroespacial amb menció en Aeronavegació i Enginyeria Telemàtica; Aurora Calderón i Arnau Cepero, estudiants d’Enginyeria Telemàtica; i Joel Rojas, estudiant del grau en Enginyeria Aeroespacial amb menció en Aeroports i Enginyeria Telemàtica. Estem motivats per treballar conjuntament a l’assignatura EA i aprofitar-la per consolidar coneixements tant en l’àmbit aeroespacial com en el telemàtic, de manera similar al que ja vam fer a l’assignatura DSA, on també vam treballar plegats com a grup. Tenim interès a implicar-nos en les activitats i els projectes del curs, i a fer una feina responsable i consistent al llarg del quadrimestre. També volem aprofitar la diversitat de perfils del grup per complementar-nos i millorar el resultat del treball en equip."
+      "Som el Grup 1 de l'assignatura EA del quadrimestre de primavera 2025-26.",
+      "En aquest blog publicarem el nostre progrés setmanal, els exercicis resolts i les decisions tècniques que anem prenent.",
+      "L'objectiu és mantenir un registre clar del treball fet i facilitar el seguiment del projecte durant el curs."
     ],
-    "imatges": [
-      "presentacio.jpg"
-    ]
+    "imatge": "presentacio.jpg",
+    "url": "presentacio.html"
+  },
+  {
+    "id": "p2",
+    "titol": "Histories d'usuari",
+    "data": "2026-03-13",
+    "etiquetes": ["analisi", "histories d'usuari", "planificacio"],
+    "preview": "Definim les histories d'usuari principals per estructurar el backlog del projecte.",
+    "text": [
+      "En aquesta entrada hem definit les principals histories d'usuari que guiaran el desenvolupament del projecte.",
+      "Com a objectiu, volem que cada funcionalitat respongui a una necessitat real de l'usuari final i que sigui facil de validar.",
+      "Les histories inclouen el rol, la necessitat i el valor aportat, per tal de prioritzar el backlog amb criteris clars."
+    ],
+    "url": "histories-usuari.html"
   }
 ]
