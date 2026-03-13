@@ -68,12 +68,18 @@
     .content{padding:20px}
     .carousel{
       position:relative;
-      margin:0 0 20px 0;
+      margin:0;
       border:1px solid var(--line);
       border-radius:16px;
       overflow:hidden;
       background:#fff;
       box-shadow:var(--shadow);
+    }
+    .carousel + .carousel{
+      margin-top:16px;
+    }
+    .carousel + p.subapartat{
+      margin-top:16px;
     }
     .carousel-track{
       display:flex;
@@ -82,14 +88,47 @@
     }
     .carousel-slide{
       flex:0 0 100%;
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#f2f5ff;
     }
     .carousel-slide img{
       display:block;
-      width:100%;
+      width:auto;
+      max-width:100%;
       height:auto;
-      max-height:620px;
+      max-height:none;
       object-fit:contain;
-      background:#f2f5ff;
+      margin:0 auto;
+    }
+    .carousel-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.9);
+      color:var(--text);
+      font-size:22px;
+      line-height:1;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      z-index:2;
+    }
+    .carousel-arrow:hover{
+      background:#fff;
+    }
+    .carousel-arrow.prev{left:10px}
+    .carousel-arrow.next{right:10px}
+    .carousel-arrow:focus-visible{
+      outline:2px solid #2f66ff;
+      outline-offset:2px;
     }
     .carousel-dots{
       display:flex;
@@ -111,6 +150,9 @@
     .carousel-dot.active{
       background:#2f66ff;
     }
+    .subapartat{
+      margin:0 0 24px 0;
+    }
     p{margin:0 0 14px 0}
     p:last-child{margin-bottom:0}
     .back{
@@ -129,6 +171,11 @@
     @media (max-width: 920px){
       .site-head{flex-direction:column}
       .brand-logo{width:52px; height:52px}
+      .carousel-arrow{
+        width:34px;
+        height:34px;
+        font-size:20px;
+      }
     }
   </style>
 </head>
@@ -164,18 +211,46 @@
               <img src="../images/carousel_mockup/phone2.png" alt="Pantalles d'activitat social i xat" />
             </figure>
           </div>
+          <button class="carousel-arrow prev" id="mockupCarouselPrev" aria-label="Imatge anterior" type="button">&#8249;</button>
+          <button class="carousel-arrow next" id="mockupCarouselNext" aria-label="Imatge seguent" type="button">&#8250;</button>
           <div class="carousel-dots" id="mockupCarouselDots" aria-label="Navegacio del carrousel"></div>
         </section>
 
-        <p><strong>Registre i inici de sessio</strong><br />Les primeres pantalles permeten crear un compte o iniciar sessio introduint el correu electronic. Tambe s'ofereix l'opcio de continuar amb Google o Apple. A la part inferior s'indica que, en continuar, l'usuari accepta els termes de servei i la politica de privacitat.</p>
+        <section class="carousel" aria-label="Captures del mockup web">
+          <div class="carousel-track" id="mockupWebCarouselTrack">
+            <figure class="carousel-slide">
+              <img src="../images/carousel_mockup_web/web1.png" alt="Mockup web pantalla 1" />
+            </figure>
+            <figure class="carousel-slide">
+              <img src="../images/carousel_mockup_web/web2.png" alt="Mockup web pantalla 2" />
+            </figure>
+            <figure class="carousel-slide">
+              <img src="../images/carousel_mockup_web/web3.png" alt="Mockup web pantalla 3" />
+            </figure>
+            <figure class="carousel-slide">
+              <img src="../images/carousel_mockup_web/web4.png" alt="Mockup web pantalla 4" />
+            </figure>
+            <figure class="carousel-slide">
+              <img src="../images/carousel_mockup_web/web5.png" alt="Mockup web pantalla 5" />
+            </figure>
+            <figure class="carousel-slide">
+              <img src="../images/carousel_mockup_web/web6.png" alt="Mockup web pantalla 6" />
+            </figure>
+          </div>
+          <button class="carousel-arrow prev" id="mockupWebCarouselPrev" aria-label="Imatge anterior" type="button">&#8249;</button>
+          <button class="carousel-arrow next" id="mockupWebCarouselNext" aria-label="Imatge seguent" type="button">&#8250;</button>
+          <div class="carousel-dots" id="mockupWebCarouselDots" aria-label="Navegacio del carrousel"></div>
+        </section>
 
-        <p><strong>Pantalla principal</strong><br />La pantalla d'inici mostra un cercador per explorar destinacions i rutes. Tambe destaca una ruta de la setmana i diferents categories com historia, street art o gastronomia. A sota es mostren rutes populars amb la seva puntuacio i nombre de ressenyes.</p>
+        <p class="subapartat"><strong>Registre i inici de sessio</strong><br />Les primeres pantalles permeten crear un compte o iniciar sessio introduint el correu electronic. Tambe s'ofereix l'opcio de continuar amb Google o Apple. A la part inferior s'indica que, en continuar, l'usuari accepta els termes de servei i la politica de privacitat.</p>
 
-        <p><strong>Exploracio de rutes al mapa</strong><br />Una altra pantalla presenta una ruta marcada sobre un mapa d'una ciutat, amb informacio com la valoracio, el nombre de ressenyes i la distancia total. L'usuari pot iniciar la ruta directament des d'aquesta vista.</p>
+        <p class="subapartat"><strong>Pantalla principal</strong><br />La pantalla d'inici mostra un cercador per explorar destinacions i rutes. Tambe destaca una ruta de la setmana i diferents categories com historia, street art o gastronomia. A sota es mostren rutes populars amb la seva puntuacio i nombre de ressenyes.</p>
 
-        <p><strong>Activitat social</strong><br />La seccio d'activitat mostra les interaccions d'altres usuaris: publicacions de rutes, likes, comentaris o persones que han guardat una ruta. Tambe hi ha opcions per seguir altres usuaris.</p>
+        <p class="subapartat"><strong>Exploracio de rutes al mapa</strong><br />Una altra pantalla presenta una ruta marcada sobre un mapa d'una ciutat, amb informacio com la valoracio, el nombre de ressenyes i la distancia total. L'usuari pot iniciar la ruta directament des d'aquesta vista.</p>
 
-        <p><strong>Xat entre usuaris</strong><br />Finalment, es mostra una conversa dins de l'aplicacio entre dos usuaris que comenten una ruta. A traves del xat poden compartir opinions, consells o recomanacions sobre altres rutes i llocs per visitar.</p>
+        <p class="subapartat"><strong>Activitat social</strong><br />La seccio d'activitat mostra les interaccions d'altres usuaris: publicacions de rutes, likes, comentaris o persones que han guardat una ruta. Tambe hi ha opcions per seguir altres usuaris.</p>
+
+        <p class="subapartat"><strong>Xat entre usuaris</strong><br />Finalment, es mostra una conversa dins de l'aplicacio entre dos usuaris que comenten una ruta. A traves del xat poden compartir opinions, consells o recomanacions sobre altres rutes i llocs per visitar.</p>
 
         <a class="back" href="../../../index.html">Tornar al blog</a>
       </div>
@@ -233,16 +308,19 @@
         .catch(() => {});
     }
 
-    function initMockupCarousel(){
-      const track = document.getElementById("mockupCarouselTrack");
-      const dotsWrap = document.getElementById("mockupCarouselDots");
-      if(!track || !dotsWrap) return;
+    function initCarousel(prefix){
+      const track = document.getElementById(`${prefix}Track`);
+      const dotsWrap = document.getElementById(`${prefix}Dots`);
+      const prevBtn = document.getElementById(`${prefix}Prev`);
+      const nextBtn = document.getElementById(`${prefix}Next`);
+      if(!track || !dotsWrap || !prevBtn || !nextBtn) return;
 
       const slides = Array.from(track.children);
       const total = slides.length;
       if(!total) return;
 
       let index = 0;
+      let timer = null;
 
       function render(){
         track.style.transform = `translateX(-${index * 100}%)`;
@@ -261,22 +339,44 @@
         dot.addEventListener("click", () => {
           index = i;
           render();
+          restartAuto();
         });
         dotsWrap.appendChild(dot);
       });
 
+      prevBtn.addEventListener("click", () => {
+        index = (index - 1 + total) % total;
+        render();
+        restartAuto();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        index = (index + 1) % total;
+        render();
+        restartAuto();
+      });
+
       render();
 
-      if(total > 1){
-        setInterval(() => {
+      function startAuto(){
+        if(total <= 1) return;
+        timer = setInterval(() => {
           index = (index + 1) % total;
           render();
         }, 5000);
       }
+
+      function restartAuto(){
+        if(timer) clearInterval(timer);
+        startAuto();
+      }
+
+      startAuto();
     }
 
     syncPostMetaFromJson();
-    initMockupCarousel();
+    initCarousel("mockupCarousel");
+    initCarousel("mockupWebCarousel");
   </script>
 </body>
 </html>
