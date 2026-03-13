@@ -30,6 +30,17 @@
       min-height:100vh;
     }
     .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .site-head{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:18px;
+      padding:22px 20px; border:1px solid var(--line);
+      border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+      box-shadow:var(--shadow); margin-bottom:18px;
+    }
+    .brand-wrap{display:flex; align-items:flex-start; gap:14px; min-width:0}
+    .brand-logo{width:64px; height:64px; object-fit:contain; flex:0 0 auto}
+    .brand{display:flex; flex-direction:column; gap:8px}
+    .brand h1{margin:0; font-size:22px; letter-spacing:.2px; line-height:1.3}
+    .brand p{margin:0; color:var(--muted); max-width:70ch}
     .card{
       border:1px solid var(--line);
       border-radius:var(--radius);
@@ -42,7 +53,7 @@
       border-bottom:1px solid var(--line);
       background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.72));
     }
-    h1{margin:0 0 8px 0; font-size:30px; line-height:1.2}
+    .post-title{margin:0 0 8px 0; font-size:30px; line-height:1.2}
     .meta{color:var(--muted); font-size:14px}
     .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
     .tag{
@@ -57,11 +68,11 @@
     .content{padding:20px}
     .hero{
       width:100%;
+      height:auto;
       border-radius:14px;
       border:1px solid var(--line);
       margin:4px 0 18px 0;
-      object-fit:cover;
-      max-height:420px;
+      object-fit:contain;
       background:#fff;
     }
     p{margin:0 0 14px 0}
@@ -79,13 +90,28 @@
       text-decoration:none;
       font-size:14px;
     }
+    @media (max-width: 920px){
+      .site-head{flex-direction:column}
+      .brand-logo{width:52px; height:52px}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
+    <header class="site-head">
+      <div class="brand-wrap">
+        <img class="brand-logo" src="../../general/logo_eetac.png" alt="Logo EETAC" />
+        <div class="brand">
+          <h1>Blog assignatura EA - G1 - Quadrimestre de Primavera Curs 2025-26</h1>
+          <p><strong>EETAC · UPC</strong> — Blog on anirem compartint el nostre progrés dins l'assignatura EA</p>
+        </div>
+      </div>
+      <a class="back" href="../../../index.html">Tornar al blog</a>
+    </header>
+
     <article class="card">
       <header class="head">
-        <h1>Presentacio G1 - EA</h1>
+        <h2 class="post-title">Presentacio G1 - EA</h2>
         <p class="meta">Data: 16 de febrer de 2026</p>
         <div class="tags">
           <span class="tag">presentacio</span>

@@ -42,6 +42,8 @@
       border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
       box-shadow:var(--shadow); backdrop-filter: blur(10px);
     }
+    .brand-wrap{display:flex; align-items:flex-start; gap:14px; min-width:0}
+    .brand-logo{width:64px; height:64px; object-fit:contain; flex:0 0 auto}
     .brand{display:flex; flex-direction:column; gap:8px}
     .brand h1{margin:0; font-size:22px; letter-spacing:.2px}
     .brand p{margin:0; color:var(--muted); max-width:70ch}
@@ -71,6 +73,7 @@
     @media (max-width: 920px){
       .grid{grid-template-columns:1fr}
       header{flex-direction:column}
+      .brand-logo{width:52px; height:52px}
       nav{justify-content:flex-start}
     }
     main, aside{
@@ -225,9 +228,12 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="brand">
-        <h1>Blog assignatura EA - G1 - Quadrimestre de Primavera Curs 2025-26</h1>
-        <p><strong>EETAC · UPC</strong> —  Blog on anirem compartint el nostre progrés dins l'assignatura EA</p>
+      <div class="brand-wrap">
+        <img class="brand-logo" src="resources/general/logo_eetac.png" alt="Logo EETAC" />
+        <div class="brand">
+          <h1>Blog assignatura EA - G1 - Quadrimestre de Primavera Curs 2025-26</h1>
+          <p><strong>EETAC · UPC</strong> —  Blog on anirem compartint el nostre progrés dins l'assignatura EA</p>
+        </div>
       </div>
       <nav aria-label="Navegació principal">
         <a class="pill" href="#inici"><strong>Inici</strong></a>
@@ -322,7 +328,7 @@
         const inTag = !tag || (p.etiquetes||[]).some(t => String(t).toLowerCase() === tag);
         if(!inTag) return false;
         if(!q) return true;
-        const hay = (p.titol + " " + (p.text||[]).join(" ") + " " + (p.etiquetes||[]).join(" ")).toLowerCase();
+        const hay = (p.titol + " " + (p.preview||"") + " " + (p.etiquetes||[]).join(" ")).toLowerCase();
         return hay.includes(q);
       });
     }
@@ -335,7 +341,7 @@
 
     function renderPostCard(p){
       const tags = (p.etiquetes||[]).map(t => `<a class="tag" data-tag="${escapeHtml(t)}" href="#">${escapeHtml(t)}</a>`).join(" ");
-      const excerptRaw = (p.text||[]).join(" ");
+      const excerptRaw = String(p.preview || "").trim();
       const excerpt = excerptRaw.length > 220 ? excerptRaw.slice(0, 220).trim() + "…" : excerptRaw;
       const postUrl = getPostUrl(p);
       return `
