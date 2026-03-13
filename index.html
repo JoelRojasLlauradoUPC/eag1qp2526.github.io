@@ -269,8 +269,8 @@
           <h3>Sobre el blog</h3>
           <div class="list">
             <div class="item" role="group" aria-label="Descripció">
-              <strong>EETAC · UPC</strong>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus.</span>
+              <strong>Sobre el blog</strong>
+              <span>En aquest blog trobareu tota la informació sobre el nostre projecte de l'assignatura EA: des de la presentació inicial fins a la versió final.</span>
             </div>
           </div>
         </div>
@@ -358,16 +358,25 @@
     }
 
     function renderTags(tagList){
+      const countByTag = new Map();
+      posts.forEach(p => {
+        (p.etiquetes || []).forEach(t => {
+          const key = String(t).trim().toLowerCase();
+          if(!key) return;
+          countByTag.set(key, (countByTag.get(key) || 0) + 1);
+        });
+      });
+
       const all = `
         <a class="item" href="#" data-tag="">
           <strong>Totes</strong>
-          <span>Lorem ipsum dolor sit amet.</span>
+          <span>${posts.length} ${posts.length === 1 ? "entrada disponible" : "entrades disponibles"}</span>
         </a>
       `;
       const rest = tagList.map(t => `
         <a class="item" href="#" data-tag="${escapeHtml(t)}">
           <strong>${escapeHtml(t)}</strong>
-          <span>Lorem ipsum dolor sit amet.</span>
+          <span>${countByTag.get(String(t).toLowerCase()) || 0} ${(countByTag.get(String(t).toLowerCase()) || 0) === 1 ? "entrada" : "entrades"}</span>
         </a>
       `).join("");
       $("#tags").innerHTML = all + rest;
@@ -390,8 +399,8 @@
       `).join("");
       $("#arxiuList").innerHTML = items || `
         <div class="item">
-          <strong>Lorem ipsum</strong>
-          <span>Lorem ipsum dolor sit amet.</span>
+          <strong>Sense entrades</strong>
+          <span>No hi ha cap publicació a l'arxiu.</span>
         </div>
       `;
     }
@@ -487,14 +496,14 @@
       $("#comptador").textContent = "0 entrades";
       $("#tags").innerHTML = `
         <div class="item">
-          <strong>Lorem ipsum</strong>
-          <span>Lorem ipsum dolor sit amet.</span>
+          <strong>Etiquetes no disponibles</strong>
+          <span>No s'han pogut carregar les etiquetes.</span>
         </div>
       `;
       $("#arxiuList").innerHTML = `
         <div class="item">
-          <strong>Lorem ipsum</strong>
-          <span>Lorem ipsum dolor sit amet.</span>
+          <strong>Arxiu no disponible</strong>
+          <span>No s'ha pogut carregar l'arxiu d'entrades.</span>
         </div>
       `;
     });
