@@ -111,9 +111,9 @@
 
     <article class="card">
       <header class="head">
-        <h2 class="post-title">Presentacio G1 - EA</h2>
+        <h2 class="post-title" id="postTitle">Presentacio G1 - EA</h2>
         <p class="meta">Data: 16 de febrer de 2026</p>
-        <div class="tags">
+        <div class="tags" id="postTags">
           <span class="tag">presentacio</span>
           <span class="tag">grup</span>
         </div>
@@ -130,5 +130,49 @@
       </div>
     </article>
   </div>
+
+  <script>
+    function syncPostMetaFromJson(){
+      const fileName = decodeURIComponent(window.location.pathname.split("/").pop() || "").toLowerCase();
+      if(!fileName) return;
+
+      fetch("../../../posts.json", { cache: "no-store" })
+        .then(res => {
+          if(!res.ok) throw new Error("No s'ha pogut carregar posts.json");
+          return res.json();
+        })
+        .then(data => {
+          const list = Array.isArray(data) ? data : [];
+          const post = list.find(p => String((p && p.url) || "").trim().toLowerCase() === fileName);
+          if(!post) return;
+
+          const titleEl = document.querySelector("#postTitle");
+          if(titleEl && post.titol) titleEl.textContent = post.titol;
+          if(post.titol) document.title = post.titol;
+
+          const tagsEl = document.querySelector("#postTags");
+          if(tagsEl){
+            const tags = Array.isArray(post.etiquetes) ? post.etiquetes : [];
+            tagsEl.innerHTML = "";
+            if(!tags.length){
+              const span = document.createElement("span");
+              span.className = "tag";
+              span.textContent = "sense etiqueta";
+              tagsEl.appendChild(span);
+            } else {
+              tags.forEach(t => {
+                const span = document.createElement("span");
+                span.className = "tag";
+                span.textContent = String(t);
+                tagsEl.appendChild(span);
+              });
+            }
+          }
+        })
+        .catch(() => {});
+    }
+
+    syncPostMetaFromJson();
+  </script>
 </body>
 </html>
