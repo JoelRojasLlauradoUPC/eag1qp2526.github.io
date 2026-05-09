@@ -30,5 +30,13 @@
     "etiquetes": ["Sprint", "Angular", "Backoffice"],
     "preview": "En aquest Sprint ens hem centrat en la implementació de la primera versió del nostre Backoffice amb Angular. Hem inclòs la gestió completa d'Usuaris, Rutes i Punts mitjançant la connexió amb la nostra API REST.",
     "url": "sprint1.html"
+  },
+  {
+    "id": "p5",
+    "titol": "Sprint 2: Seguretat JWT i primera versió de la WebApp",
+    "data": "2026-04-17",
+    "etiquetes": ["Sprint", "JWT", "React", "Backoffice"],
+    "preview": "Durant aquest Sprint 2 hem integrat l'autenticació i autorització mitjançant JWT tant al Backend com al Backoffice. A més, hem llançat la primera versió de la nostra WebApp desenvolupada en React.",
+    "url": "sprint2.html"
   }
 ]
