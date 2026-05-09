@@ -22,5 +22,13 @@
     "etiquetes": ["Frontend"],
     "preview": "Presentem el mockup inicial del projecte amb l'estructura visual principal, el flux de navegació i les primeres decisions de disseny.",
     "url": "mockup.html"
+  },
+  {
+    "id": "p4",
+    "titol": "Sprint 1: Desenvolupament del Backoffice",
+    "data": "2026-03-20",
+    "etiquetes": ["Sprint", "Angular", "Backoffice"],
+    "preview": "En aquest Sprint ens hem centrat en la implementació de la primera versió del nostre Backoffice amb Angular. Hem inclòs la gestió completa d'Usuaris, Rutes i Punts mitjançant la connexió amb la nostra API REST.",
+    "url": "sprint1.html"
   }
 ]

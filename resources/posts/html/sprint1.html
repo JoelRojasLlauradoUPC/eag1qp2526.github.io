@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ca">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sprint 1: Desenvolupament del Backoffice</title>
+  <meta name="description" content="Descripció del Sprint 1 del projecte EA, implementació del backoffice." />
+  <style>
+    :root {
+      --bg: #f6f8ff;
+      --card: #ffffff;
+      --text: #0b1220;
+      --muted: #3a4466;
+      --line: rgba(11, 18, 32, .12);
+      --shadow: 0 12px 30px rgba(15, 25, 48, .10);
+      --radius: 18px;
+      --max: 980px;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1100px 650px at 15% -10%, rgba(47, 102, 255, .18), transparent 60%),
+        radial-gradient(900px 600px at 95% 10%, rgba(14, 165, 122, .14), transparent 55%),
+        var(--bg);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px
+    }
+
+    .site-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .72));
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      min-width: 0
+    }
+
+    .brand-logo {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      flex: 0 0 auto
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: .2px;
+      line-height: 1.3
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 70ch
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .86);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .head {
+      padding: 20px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .72));
+    }
+
+    .post-title {
+      margin: 0 0 8px 0;
+      font-size: 30px;
+      line-height: 1.2
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .92);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .content {
+      padding: 20px
+    }
+
+    .carousel {
+      position: relative;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .carousel+.carousel {
+      margin-top: 16px;
+    }
+
+    .carousel+p.subapartat {
+      margin-top: 16px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform .45s ease;
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f2f5ff;
+    }
+
+    .carousel-slide img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .9);
+      color: var(--text);
+      font-size: 22px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .carousel-arrow:hover {
+      background: #fff;
+    }
+
+    .carousel-arrow.prev {
+      left: 10px
+    }
+
+    .carousel-arrow.next {
+      right: 10px
+    }
+
+    .carousel-arrow:focus-visible {
+      outline: 2px solid #2f66ff;
+      outline-offset: 2px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-top: 1px solid var(--line);
+      background: rgba(255, 255, 255, .92);
+    }
+
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(58, 68, 102, .35);
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      background: #2f66ff;
+    }
+
+    .subapartat {
+      margin: 0 0 24px 0;
+    }
+
+    p {
+      margin: 0 0 14px 0
+    }
+
+    p:last-child {
+      margin-bottom: 0
+    }
+
+    .back {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .9);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    ul,
+    ol {
+      margin-top: 0;
+      margin-bottom: 14px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 920px) {
+      .site-head {
+        flex-direction: column
+      }
+
+      .brand-logo {
+        width: 52px;
+        height: 52px
+      }
+
+      .carousel-arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="site-head">
+      <div class="brand-wrap">
+        <img class="brand-logo" src="../../general/logo_eetac.png" alt="Logo EETAC" />
+        <div class="brand">
+          <h1>Blog assignatura EA - G1 - Quadrimestre de Primavera Curs 2025-26</h1>
+          <p><strong>EETAC · UPC</strong> — Blog on anirem compartint el nostre progrés dins l'assignatura EA</p>
+        </div>
+      </div>
+      <a class="back" href="../../../index.html">Tornar al blog</a>
+    </header>
+
+    <article class="card">
+      <header class="head">
+        <h2 class="post-title" id="postTitle">Sprint 1: Desenvolupament del Backoffice</h2>
+        <p class="meta" id="postDate">Data: 20 de març de 2026</p>
+        <div class="tags" id="postTags">
+          <span class="tag">Sprint</span>
+          <span class="tag">Angular</span>
+          <span class="tag">Backoffice</span>
+        </div>
+      </header>
+
+      <div class="content">
+        <p class="subapartat">
+          <strong>Període del Sprint:</strong> Del 24 de febrer al 20 de març de 2026.<br />
+          Després d'haver treballat en el desenvolupament de la API REST i la validació de dades al Backend (Sprint 0),
+          ens hem centrat en la implementació de la primera versió del nostre <strong>Backoffice amb Angular</strong>,
+          on podrem gestionar i administrar els elements principals del nostre projecte.
+        </p>
+
+        <p class="subapartat"><strong>Història d'usuari (Backoffice)</strong><br />
+          "Com a <strong>administrador del sistema</strong>, vull poder accedir a un <strong>backoffice web dissenyat en
+            Angular</strong> connectat a la nostra API REST, per tal de poder <strong>visualitzar, afegir, editar i
+            esborrar els usuaris, les rutes i els punts d'interès</strong>, podent fer ús de llistats paginats i
+          cercadors per fer una gestió eficient."</p>
+
+        <p class="subapartat"><strong>Entitats i Funcionalitats Desenvolupades</strong><br />
+          Dins del projecte de backoffice hem integrat un mínim de tres entitats principals connectades amb MongoDB:</p>
+        <ul>
+          <li><strong>Usuaris (Users):</strong> Gestió de tots els perfils registrats a l'aplicació.</li>
+          <li><strong>Rutes (Routes):</strong> Administració de les rutes (free tours, viatges...).</li>
+          <li><strong>Punts (Points):</strong> Punts d'interès de cadascuna de les rutes.</li>
+        </ul>
+        <p>Per a cada una d'aquestes entitats hem desenvolupat el cicle complet d'operacions (CRUD):</p>
+        <ul>
+          <li><strong>Llistat d'elements paginat:</strong> Aprofitem els recursos de <code>limit</code> i
+            <code>skip</code> de la base de dades MongoDB per a un rendiment òptim en frontend.</li>
+          <li><strong>Cercador d'elements:</strong> Hem afegit un cercador (per exemple, cerca per nom d'usuari o cerca
+            de rutes per ciutat).</li>
+          <li><strong>Formularis de creació i modificació:</strong> Interfícies amigables per a afegir i editar
+            informació amb validacions integrades (tant al client a través d'Angular com al servidor).</li>
+          <li><strong>Esborrat de dades:</strong>
+            <ul>
+              <li><em>Esborrat tou (soft delete):</em> Els elements es marquen com a inactius sense desaparèixer
+                permanentment.</li>
+              <li><em>Esborrat dur (hard delete):</em> L'esborrat físic complet.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <section class="carousel" aria-label="Captures del backoffice">
+          <div class="carousel-track" id="sprintCarouselTrack">
+            <figure class="carousel-slide">
+              <img src="../images/sprint1/1.png" alt="Llistat d'Usuaris Paginat" />
+            </figure>
+            <figure class="carousel-slide">
+              <img src="../images/sprint1/2.png" alt="Edició d'usuaris i esborrat tou" />
+            </figure>
+            <figure class="carousel-slide">
+              <img src="../images/sprint1/3.png" alt="Llistat de Rutes" />
+            </figure>
+            <figure class="carousel-slide">
+              <img src="../images/sprint1/4.png" alt="Formulari d'edició de rutes" />
+            </figure>
+            <figure class="carousel-slide">
+              <img src="../images/sprint1/5.png" alt="Llistat de Punts i accions CRUD" />
+            </figure>
+          </div>
+          <button class="carousel-arrow prev" id="sprintCarouselPrev" aria-label="Imatge anterior"
+            type="button">&#8249;</button>
+          <button class="carousel-arrow next" id="sprintCarouselNext" aria-label="Imatge seguent"
+            type="button">&#8250;</button>
+          <div class="carousel-dots" id="sprintCarouselDots" aria-label="Navegacio del carrousel"></div>
+        </section>
+
+        <p class="subapartat" style="margin-top:24px"><strong>Metodologia i Organització d'Equip</strong><br />
+          Hem continuat aplicant la nostra <strong>metodologia àgil</strong>, basant-nos en el framework Scrum. Al
+          nostre projecte de GitHub hem distribuït clarament les històries i tasques.
+          Durant aquest període, cadascú ha assumit els seus rols pertinents (Scrum Master, Product Owner i Equip de
+          desenvolupament) i hem fet un control del registre de temps. Hem recollit tota aquesta informació a l'Excel de
+          seguiment desglossant les hores dedicades en frontend, backoffice, backend, devops i gestió, com demanava la
+          rubrica de l'assignatura. I, per suposat, tot el codi està traçat sota el nostre flux de treball actiu de Git.
+        </p>
+
+        <a class="back" href="../../../index.html">Tornar al blog</a>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    function formatDate(iso) {
+      if (!iso) return "";
+      const d = new Date(String(iso) + "T00:00:00");
+      return new Intl.DateTimeFormat("ca-ES", { year: "numeric", month: "long", day: "numeric" }).format(d);
+    }
+
+    function syncPostMetaFromJson() {
+      const fileName = decodeURIComponent(window.location.pathname.split("/").pop() || "").toLowerCase();
+      if (!fileName) return;
+
+      fetch("../../../posts.json", { cache: "no-store" })
+        .then(res => {
+          if (!res.ok) throw new Error("No s'ha pogut carregar posts.json");
+          return res.json();
+        })
+        .then(data => {
+          const list = Array.isArray(data) ? data : [];
+          const post = list.find(p => String((p && p.url) || "").trim().toLowerCase() === fileName);
+          if (!post) return;
+
+          const titleEl = document.querySelector("#postTitle");
+          if (titleEl && post.titol) titleEl.textContent = post.titol;
+          if (post.titol) document.title = post.titol;
+
+          const dateEl = document.querySelector("#postDate");
+          const formattedDate = formatDate(post.data);
+          if (dateEl && formattedDate) dateEl.textContent = `Data: ${formattedDate}`;
+
+          const tagsEl = document.querySelector("#postTags");
+          if (tagsEl) {
+            const tags = Array.isArray(post.etiquetes) ? post.etiquetes : [];
+            tagsEl.innerHTML = "";
+            if (!tags.length) {
+              const span = document.createElement("span");
+              span.className = "tag";
+              span.textContent = "sense etiqueta";
+              tagsEl.appendChild(span);
+            } else {
+              tags.forEach(t => {
+                const span = document.createElement("span");
+                span.className = "tag";
+                span.textContent = String(t);
+                tagsEl.appendChild(span);
+              });
+            }
+          }
+        })
+        .catch(() => { });
+    }
+
+    function initCarousel(prefix) {
+      const track = document.getElementById(`${prefix}Track`);
+      const dotsWrap = document.getElementById(`${prefix}Dots`);
+      const prevBtn = document.getElementById(`${prefix}Prev`);
+      const nextBtn = document.getElementById(`${prefix}Next`);
+      if (!track || !dotsWrap || !prevBtn || !nextBtn) return;
+
+      const slides = Array.from(track.children);
+      const total = slides.length;
+      if (!total) return;
+
+      let index = 0;
+      let timer = null;
+
+      function render() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        const dots = dotsWrap.querySelectorAll(".carousel-dot");
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === index);
+          dot.setAttribute("aria-current", i === index ? "true" : "false");
+        });
+      }
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "carousel-dot";
+        dot.setAttribute("aria-label", `Anar a la imatge ${i + 1}`);
+        dot.addEventListener("click", () => {
+          index = i;
+          render();
+          restartAuto();
+        });
+        dotsWrap.appendChild(dot);
+      });
+
+      prevBtn.addEventListener("click", () => {
+        index = (index - 1 + total) % total;
+        render();
+        restartAuto();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        index = (index + 1) % total;
+        render();
+        restartAuto();
+      });
+
+      render();
+
+      function startAuto() {
+        if (total <= 1) return;
+        timer = setInterval(() => {
+          index = (index + 1) % total;
+          render();
+        }, 5000);
+      }
+
+      function restartAuto() {
+        if (timer) clearInterval(timer);
+        startAuto();
+      }
+
+      startAuto();
+    }
+
+    syncPostMetaFromJson();
+    initCarousel("sprintCarousel");
+  </script>
+</body>
+
+</html>
