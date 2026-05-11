@@ -38,5 +38,21 @@
     "etiquetes": ["Sprint", "JWT", "React", "Backoffice"],
     "preview": "Durant aquest Sprint 2 hem integrat l'autenticació i autorització mitjançant JWT tant al Backend com al Backoffice. A més, hem llançat la primera versió de la nostra WebApp desenvolupada en React.",
     "url": "sprint2.html"
-  }
+  },
+  {
+  "id": "p6",
+  "titol": "Sprint 3: Desplegament a Docker, App mòbil i millores generals",
+  "data": "2026-05-12",
+  "etiquetes": ["Sprint", "Docker", "App mòbil", "WebApp", "Accessibilitat"],
+  "preview": "Durant aquest Sprint 3 hem avançat en el desplegament del projecte amb Docker, hem aconseguit una primera versió funcional de l'App mòbil i hem continuat millorant la WebApp, el Backend i el Backoffice. També hem incorporat millores d'accessibilitat per fer l'aplicació més usable.",
+  "url": "sprint3.html"
+},
+{
+  "id": "p7",
+  "titol": "Elecció de l'estratègia tecnològica",
+  "data": "2026-05-12",
+  "etiquetes": ["Tecnologia", "React", "Flutter", "Angular", "Backend", "MongoDB"],
+  "preview": "En aquesta entrada expliquem les decisions que hem pres per definir el nostre stack tecnològic: Angular per al Backoffice, React per a la WebApp, Flutter per a l'App mòbil, Node.js amb Express i TypeScript per al Backend i MongoDB com a base de dades.",
+  "url": "estrategia-tecnologica.html"
+}
 ]

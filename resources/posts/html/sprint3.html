@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sprint 1: Desenvolupament del Backoffice</title>
-  <meta name="description" content="Descripció del Sprint 1 del projecte EA, implementació del backoffice." />
-  <style>
+  <title>Sprint 3: Desplegament a Docker, App mòbil i millores generals</title>
+
+    <meta name="description"
+    content="Descripció del Sprint 3 del projecte EA: desplegament amb Docker, primera versió funcional de l'App mòbil, millores a la WebApp, Backend, Backoffice i accessibilitat." />  <style>
     :root {
       --bg: #f6f8ff;
       --card: #ffffff;
@@ -172,7 +173,7 @@
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: none;
+      max-height: 450px;
       object-fit: contain;
       margin: 0 auto;
     }
@@ -307,78 +308,130 @@
 
     <article class="card">
       <header class="head">
-        <h2 class="post-title" id="postTitle">Sprint 1: Desenvolupament del Backoffice</h2>
-        <p class="meta" id="postDate">Data: 20 de març de 2026</p>
+        <h2 class="post-title" id="postTitle">Sprint 3: Desplegament a Docker, App mòbil i millores generals</h2>
+
+        <p class="meta" id="postDate">Data: 12 de maig de 2026</p>
+
         <div class="tags" id="postTags">
-          <span class="tag">Sprint</span>
-          <span class="tag">Angular</span>
-          <span class="tag">Backoffice</span>
+        <span class="tag">Sprint</span>
+        <span class="tag">Docker</span>
+        <span class="tag">App mòbil</span>
+        <span class="tag">WebApp</span>
+        <span class="tag">Accessibilitat</span>
         </div>
       </header>
 
       <div class="content">
         <p class="subapartat">
-          <strong>Període del Sprint:</strong> Del 24 de febrer al 20 de març de 2026.<br />
-          Després d'haver treballat en el desenvolupament de la API REST i la validació de dades al Backend (Sprint 0),
-          ens hem centrat en la implementació de la primera versió del nostre <strong>Backoffice amb Angular</strong>,
-          on podrem gestionar i administrar els elements principals del nostre projecte.
+        <strong>Període del Sprint:</strong> Fins a l'12 de maig de 2026.<br />
+        En aquest <strong>Sprint 3</strong> hem consolidat diferents parts clau del projecte. Hem avançat en el
+        <strong>desplegament amb Docker</strong>, hem desenvolupat una primera versió funcional de l'<strong>App mòbil</strong>,
+        hem incorporat noves funcionalitats a la <strong>WebApp</strong> i hem continuat millorant el
+        <strong>Backend</strong>. A més, hem començat a aplicar criteris
+        d'<strong>accessibilitat</strong> per fer l'aplicació més clara, usable i inclusiva.
         </p>
-        <p class="subapartat"><strong>Entitats i Funcionalitats Desenvolupades</strong><br />
-          Dins del projecte de backoffice hem integrat un mínim de tres entitats principals connectades amb MongoDB:</p>
-        <ul>
-          <li><strong>Usuaris (Users):</strong> Gestió de tots els perfils registrats a l'aplicació.</li>
-          <li><strong>Rutes (Routes):</strong> Administració de les rutes (free tours, viatges...).</li>
-          <li><strong>Punts (Points):</strong> Punts d'interès de cadascuna de les rutes.</li>
-        </ul>
-        <p>Per a cada una d'aquestes entitats hem desenvolupat el cicle complet d'operacions (CRUD):</p>
-        <ul>
-          <li><strong>Llistat d'elements paginat:</strong> Aprofitem els recursos de <code>limit</code> i
-            <code>skip</code> de la base de dades MongoDB per a un rendiment òptim en frontend.</li>
-          <li><strong>Cercador d'elements:</strong> Hem afegit un cercador (per exemple, cerca per nom d'usuari o cerca
-            de rutes per ciutat).</li>
-          <li><strong>Formularis de creació i modificació:</strong> Interfícies amigables per a afegir i editar
-            informació amb validacions integrades (tant al client a través d'Angular com al servidor).</li>
-          <li><strong>Esborrat de dades:</strong>
-            <ul>
-              <li><em>Soft delete:</em> Els elements es marquen com a inactius sense desaparèixer
-                permanentment.</li>
-              <li><em>Hard delete:</em> L'esborrat físic complet.</li>
-            </ul>
-          </li>
-        </ul>
 
-        <section class="carousel" aria-label="Captures del backoffice">
-          <div class="carousel-track" id="sprintCarouselTrack">
+        <p class="subapartat"><strong>Desplegament a Docker</strong><br />
+        Durant aquest sprint hem treballat en el desplegament del projecte mitjançant <strong>Docker</strong>, amb l'objectiu
+        de facilitar l'execució dels diferents serveis de l'aplicació en un entorn més controlat i reproduïble. Aquesta
+        millora ens permet preparar millor el projecte per a entorns de desenvolupament, proves i futurs desplegaments.
+        </p>
+
+        <p class="subapartat"><strong>Primera versió funcional de l'App mòbil</strong><br />
+        També hem aconseguit una primera versió funcional de <strong>l'App mòbil</strong>. Aquesta versió inicial permet a 
+        l'usuari fer login i registrar-se, accedir a la pantalla d'inici, consultar les rutes disponibles, 
+        marcar rutes com a favorites i utilitzar un xat dins de l'aplicació. A més, hem incorporat criteris 
+        d'accessibilitat per millorar l'experiència d'ús i facilitar la navegació dins de l'app. Aquesta primera 
+        versió estableix la base sobre la qual continuarem afegint noves pantalles, interaccions i connexions amb el Backend.
+        </p>
+
+        <p class="subapartat"><strong>Millores i noves funcionalitats a la WebApp</strong><br />
+        Pel que fa a la WebApp, hem continuat evolucionant la primera versió presentada al sprint anterior.
+        En aquest sprint hem incorporat noves funcionalitats i millores visuals per fer que l'experiència
+        d'usuari sigui més completa, coherent i propera al producte final.
+        </p>
+
+        <p>
+        Hem afegit la possibilitat de marcar rutes com a favorites, de manera que l'usuari pugui guardar
+        i accedir fàcilment a les rutes que més li interessen. També hem incorporat un sistema de xat entre
+        usuaris, on un usuari pot crear un grup i altres usuaris poden unir-s'hi si el grup és públic.
+        En el cas dels xats privats, els usuaris només poden accedir-hi si disposen de la contrasenya
+        corresponent.
+        </p>
+
+        <p>
+        Una altra millora important ha estat la integració d'un mapa dins de les rutes. Aquest mapa permet
+        visualitzar el recorregut complet de la ruta i identificar els punts importants que en formen part,
+        facilitant així la comprensió del trajecte abans i durant l'experiència.
+        </p>
+
+        <p>
+        Finalment, hem afegit un botó d'accessibilitat per adaptar millor la WebApp a diferents necessitats
+        d'ús i millorar la navegació dins de la plataforma.
+        </p>
+
+        <p class="subapartat"><strong>Accessibilitat</strong><br />
+        En aquest sprint també hem incorporat un botó d'accessibilitat per millorar l'experiència
+        d'ús de la WebApp i adaptar-la a diferents necessitats dels usuaris. Aquest menú permet
+        modificar aspectes visuals i de lectura de la interfície, facilitant una navegació més
+        còmoda, clara i inclusiva.
+        </p>
+
+        <p>
+        Entre les opcions disponibles, l'usuari pot ajustar els colors de la pàgina amb modes com
+        monocrom, contrast fosc, contrast clar, baixa saturació, alta saturació i alt contrast.
+        També pot modificar la llegibilitat del contingut mitjançant opcions de configuració de la
+        font, com l'espaiat entre línies, paraules i lletres.
+        </p>
+
+        <p>
+        A més, el menú inclou opcions relacionades amb el cursor, permetent augmentar-ne la
+        visibilitat i canviar-ne el color. També s'ha afegit una opció de focus visible per facilitar
+        la navegació amb teclat i un botó per restablir la configuració d'accessibilitat quan
+        l'usuari ho necessiti.
+        </p>
+
+        <section class="carousel" aria-label="Captures de pantalla del Sprint 3">
+        <div class="carousel-track" id="sprintCarouselTrack">
             <figure class="carousel-slide">
-              <img src="../images/sprint1/1.png" alt="Llistat d'Usuaris Paginat" />
+            <img src="../images/sprint3/1.png" alt="Menú d'accessibilitat a la WebApp" />
             </figure>
+
             <figure class="carousel-slide">
-              <img src="../images/sprint1/2.png" alt="Edició d'usuaris i esborrat tou" />
+            <img src="../images/sprint3/2.png" alt="Vista del xat de grup a la WebApp" />
             </figure>
+
             <figure class="carousel-slide">
-              <img src="../images/sprint1/3.png" alt="Llistat de Rutes" />
+            <img src="../images/sprint3/3.png" alt="Mapa de la ruta amb punts importants del recorregut" />
             </figure>
+
             <figure class="carousel-slide">
-              <img src="../images/sprint1/4.png" alt="Formulari d'edició de rutes" />
+            <img src="../images/sprint3/4.png" alt="Pantalla d'inici de l'App mòbil" />
             </figure>
+
             <figure class="carousel-slide">
-              <img src="../images/sprint1/5.png" alt="Llistat de Punts i accions CRUD" />
+            <img src="../images/sprint3/5.png" alt="Menú d'accessibilitat de l'App mòbil" />
             </figure>
-          </div>
-          <button class="carousel-arrow prev" id="sprintCarouselPrev" aria-label="Imatge anterior"
+
+            <figure class="carousel-slide">
+            <img src="../images/sprint3/6.png" alt="Xat entre usuaris a l'App mòbil" />
+            </figure>
+        </div>
+
+        <button class="carousel-arrow prev" id="sprintCarouselPrev" aria-label="Imatge anterior"
             type="button">&#8249;</button>
-          <button class="carousel-arrow next" id="sprintCarouselNext" aria-label="Imatge seguent"
+
+        <button class="carousel-arrow next" id="sprintCarouselNext" aria-label="Imatge seguent"
             type="button">&#8250;</button>
-          <div class="carousel-dots" id="sprintCarouselDots" aria-label="Navegacio del carrousel"></div>
+
+        <div class="carousel-dots" id="sprintCarouselDots" aria-label="Navegacio del carrousel"></div>
         </section>
 
-        <p class="subapartat" style="margin-top:24px"><strong>Metodologia i Organització d'Equip</strong><br />
-          Hem continuat aplicant la nostra <strong>metodologia àgil</strong>, basant-nos en el framework Scrum. Al
-          nostre projecte de GitHub hem distribuït clarament les històries i tasques.
-          Durant aquest període, cadascú ha assumit els seus rols pertinents (Scrum Master, Product Owner i Equip de
-          desenvolupament) i hem fet un control del registre de temps. Hem recollit tota aquesta informació a l'Excel de
-          seguiment desglossant les hores dedicades en frontend, backoffice, backend, devops i gestió, com demanava la
-          rubrica de l'assignatura. I, per suposat, tot el codi està traçat sota el nostre flux de treball actiu de Git.
+        <p class="subapartat" style="margin-top:24px"><strong>Metodologia i organització del Sprint</strong><br />
+        Hem continuat treballant seguint una metodologia àgil, mantenint el seguiment de tasques, la distribució del treball
+        i l'evolució progressiva del projecte. En aquest sprint hem combinat tasques de desplegament, desenvolupament
+        funcional, millora tècnica i revisió d'usabilitat, mantenint el treball separat per àrees com Backend, Backoffice,
+        WebApp, App mòbil, DevOps i accessibilitat.
         </p>
 
         <a class="back" href="../../../index.html">Tornar al blog</a>
