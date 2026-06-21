@@ -54,5 +54,13 @@
   "etiquetes": ["Tecnologia", "React", "Flutter", "Angular", "Backend", "MongoDB"],
   "preview": "En aquesta entrada expliquem les decisions que hem pres per definir el nostre stack tecnològic: Angular per al Backoffice, React per a la WebApp, Flutter per a l'App mòbil, Node.js amb Express i TypeScript per al Backend i MongoDB com a base de dades.",
   "url": "estrategia-tecnologica.html"
+},
+{
+  "id": "p8",
+  "titol": "Sprint 4: Rutes, accessibilitat, IA i monitoratge",
+  "data": "2026-06-22",
+  "etiquetes": ["Sprint", "Rutes", "Accessibilitat", "IA", "Firebase", "Matomo"],
+  "preview": "Durant aquest Sprint 4 hem incorporat la creació de rutes des de la WebApp i l'App mòbil, el sistema de ressenyes i ratings, millores d'accessibilitat, insígnies, suggeriments de ruta amb IA, notificacions push, monitoratge amb Matomo i un mapa general de rutes.",
+  "url": "sprint4.html"
 }
 ]

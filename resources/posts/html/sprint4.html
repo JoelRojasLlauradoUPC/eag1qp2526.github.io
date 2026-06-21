@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="ca">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sprint 4: Rutes, accessibilitat, IA i monitoratge</title>
+
+  <meta name="description"
+    content="Descripció del Sprint 4 del projecte EA: creació de rutes des de WebApp i App mòbil, ressenyes i ratings, accessibilitat, insígnies, IA, notificacions push, Matomo i mapa general de rutes." />
+
+  <style>
+    :root {
+      --bg: #f6f8ff;
+      --card: #ffffff;
+      --text: #0b1220;
+      --muted: #3a4466;
+      --line: rgba(11, 18, 32, .12);
+      --shadow: 0 12px 30px rgba(15, 25, 48, .10);
+      --radius: 18px;
+      --max: 980px;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1100px 650px at 15% -10%, rgba(47, 102, 255, .18), transparent 60%),
+        radial-gradient(900px 600px at 95% 10%, rgba(14, 165, 122, .14), transparent 55%),
+        var(--bg);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px
+    }
+
+    .site-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .72));
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      min-width: 0
+    }
+
+    .brand-logo {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      flex: 0 0 auto
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: .2px;
+      line-height: 1.3
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 70ch
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .86);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .head {
+      padding: 20px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .72));
+    }
+
+    .post-title {
+      margin: 0 0 8px 0;
+      font-size: 30px;
+      line-height: 1.2
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .92);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .content {
+      padding: 20px
+    }
+
+    .carousel {
+      position: relative;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .carousel+.carousel {
+      margin-top: 16px;
+    }
+
+    .carousel+p.subapartat {
+      margin-top: 16px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform .45s ease;
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f2f5ff;
+    }
+
+    .carousel-slide img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 450px;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .9);
+      color: var(--text);
+      font-size: 22px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .carousel-arrow:hover {
+      background: #fff;
+    }
+
+    .carousel-arrow.prev {
+      left: 10px
+    }
+
+    .carousel-arrow.next {
+      right: 10px
+    }
+
+    .carousel-arrow:focus-visible {
+      outline: 2px solid #2f66ff;
+      outline-offset: 2px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-top: 1px solid var(--line);
+      background: rgba(255, 255, 255, .92);
+    }
+
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(58, 68, 102, .35);
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      background: #2f66ff;
+    }
+
+    .subapartat {
+      margin: 0 0 24px 0;
+    }
+
+    p {
+      margin: 0 0 14px 0
+    }
+
+    p:last-child {
+      margin-bottom: 0
+    }
+
+    .back {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .9);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    ul,
+    ol {
+      margin-top: 0;
+      margin-bottom: 14px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 920px) {
+      .site-head {
+        flex-direction: column
+      }
+
+      .brand-logo {
+        width: 52px;
+        height: 52px
+      }
+
+      .carousel-arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="site-head">
+      <div class="brand-wrap">
+        <img class="brand-logo" src="../../general/logo_eetac.png" alt="Logo EETAC" />
+        <div class="brand">
+          <h1>Blog assignatura EA - G1 - Quadrimestre de Primavera Curs 2025-26</h1>
+          <p><strong>EETAC · UPC</strong> — Blog on anirem compartint el nostre progrés dins l'assignatura EA</p>
+        </div>
+      </div>
+      <a class="back" href="../../../index.html">Tornar al blog</a>
+    </header>
+
+    <article class="card">
+      <header class="head">
+        <h2 class="post-title" id="postTitle">Sprint 4: Rutes, accessibilitat, IA i monitoratge</h2>
+
+        <p class="meta" id="postDate">Data: 2 de juny de 2026</p>
+
+        <div class="tags" id="postTags">
+          <span class="tag">Sprint</span>
+          <span class="tag">Rutes</span>
+          <span class="tag">Accessibilitat</span>
+          <span class="tag">IA</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Matomo</span>
+        </div>
+      </header>
+
+      <div class="content">
+        <p class="subapartat">
+          <strong>Període del Sprint:</strong> Fins al 22 de juny de 2026.<br />
+          En aquest <strong>Sprint 4</strong> hem continuat ampliant les funcionalitats principals del projecte,
+          millorant tant l'experiència d'usuari com la capacitat de gestió i seguiment de l'aplicació.
+          Durant aquest sprint hem treballat en la <strong>creació de rutes</strong> des de la WebApp i des de
+          l'<strong>App mòbil</strong>, el sistema de <strong>ressenyes i ratings</strong>, noves millores
+          d'<strong>accessibilitat</strong>, les <strong>insígnies</strong>, el suggeriment de rutes amb
+          <strong>IA</strong>, les <strong>notificacions push</strong>, la integració de <strong>Matomo</strong>
+          i el <strong>mapa general de rutes</strong>.
+        </p>
+
+        <p class="subapartat"><strong>Creació de rutes des de la WebApp i l'App mòbil</strong><br />
+        En aquest sprint hem afegit la possibilitat de crear rutes tant des de la
+        <strong>WebApp</strong> com des de l'<strong>App mòbil</strong>. D'aquesta manera,
+        els usuaris poden preparar i compartir les seves pròpies rutes des del dispositiu
+        que els sigui més còmode en cada moment.
+        </p>
+
+        <p>
+        Aquesta millora fa que l'aplicació sigui més oberta i participativa, ja que qualsevol
+        usuari pot contribuir amb noves propostes. Així, el conjunt de rutes disponibles pot
+        anar creixent amb experiències reals aportades per la comunitat.
+        </p>
+
+        <p class="subapartat"><strong>Sistema de ressenyes i ratings</strong><br />
+          També hem incorporat un sistema de <strong>ressenyes i valoracions</strong> per facilitar la interacció
+          entre usuaris. Ara, els usuaris poden valorar les rutes i deixar la seva opinió sobre l'experiència
+          realitzada.
+        </p>
+
+        <p>
+          Aquesta funcionalitat ajuda a generar confiança dins de la plataforma, ja que altres usuaris poden
+          consultar experiències prèvies abans de decidir quina ruta volen fer. A més, els ratings permeten
+          identificar més fàcilment les rutes millor valorades per la comunitat.
+        </p>
+
+        <p class="subapartat"><strong>Accessibilitat: idioma i rutes adaptades</strong><br />
+          En aquest sprint hem continuat millorant l'<strong>accessibilitat</strong> de l'aplicació. Per una banda,
+          hem incorporat el <strong>canvi d'idioma</strong>, fent que la plataforma sigui més adaptable a diferents
+          perfils d'usuari.
+        </p>
+
+        <p>
+          Per altra banda, hem afegit la possibilitat de <strong>filtrar rutes aptes per fer amb cadira de rodes</strong>.
+          Aquesta millora és especialment important perquè facilita que persones amb mobilitat reduïda puguin trobar
+          rutes adequades a les seves necessitats de manera més directa i clara.
+        </p>
+
+        <p class="subapartat"><strong>Insígnies i assoliments</strong><br />
+          També hem desenvolupat un sistema d'<strong>insígnies</strong>, pensat com un mecanisme de gamificació
+          dins de l'aplicació. Aquest sistema permet reconèixer determinades accions o fites aconseguides pels
+          usuaris durant l'ús de la plataforma.
+        </p>
+
+        <p>
+          Les insígnies aporten un component motivacional i fan que l'experiència sigui més dinàmica. A més,
+          poden ajudar a fomentar la participació continuada i donar més valor a les accions realitzades pels
+          usuaris dins de l'aplicació.
+        </p>
+
+        <p class="subapartat"><strong>Suggeriment de ruta amb IA</strong><br />
+          Una altra funcionalitat destacada ha estat el <strong>suggeriment de rutes amb intel·ligència artificial</strong>.
+          Aquesta característica permet oferir recomanacions més personalitzades als usuaris, ajudant-los a descobrir
+          rutes que encaixin millor amb les seves preferències o necessitats.
+        </p>
+
+        <p>
+          Aquesta integració fa que l'aplicació no només mostri informació, sinó que també pugui ajudar l'usuari
+          a prendre decisions i a trobar una ruta adequada d'una manera més intel·ligent.
+        </p>
+
+        <p class="subapartat"><strong>Notificacions push amb Firebase Cloud Messaging</strong><br />
+          Durant aquest sprint també hem treballat en les <strong>notificacions push</strong> mitjançant
+          <strong>Firebase Cloud Messaging</strong>. Aquesta funcionalitat permet enviar avisos directes als usuaris
+          i millorar la comunicació entre l'aplicació i la persona usuària.
+        </p>
+
+        <p>
+          Les notificacions push poden ser útils per informar sobre novetats, interaccions, recordatoris o altres
+          esdeveniments rellevants dins de la plataforma, fent que l'experiència sigui més activa i connectada.
+        </p>
+
+        <p class="subapartat"><strong>Monitoratge amb Matomo</strong><br />
+          Per analitzar millor l'ús real de l'aplicació, hem incorporat <strong>Matomo</strong> com a eina de
+          monitoratge. Aquesta integració ens permet obtenir informació sobre com s'utilitza la plataforma i detectar
+          possibles punts de millora.
+        </p>
+
+        <p>
+          El monitoratge ens ajuda a prendre decisions basades en dades reals, identificant quines funcionalitats
+          tenen més ús i en quines parts pot ser necessari revisar l'experiència d'usuari o el funcionament general
+          de l'aplicació.
+        </p>
+
+        <p class="subapartat"><strong>Mapa general de rutes</strong><br />
+          Finalment, hem afegit un <strong>mapa general de rutes</strong>, que permet visualitzar les diferents
+          rutes disponibles dins de la plataforma de manera global.
+        </p>
+
+        <p>
+          Aquesta vista facilita l'exploració del contingut i millora la navegació, ja que l'usuari pot localitzar
+          rutes de forma més intuïtiva i contextualitzada geogràficament.
+        </p>
+
+        <section class="carousel" aria-label="Captures de pantalla del Sprint 4">
+          <div class="carousel-track" id="sprintCarouselTrack">
+            <figure class="carousel-slide">
+              <img src="../images/sprint4/1.png" alt="Creació de rutes des de la WebApp" />
+            </figure>
+
+            <figure class="carousel-slide">
+              <img src="../images/sprint4/2.png" alt="Creació de rutes des de l'App mòbil" />
+            </figure>
+
+            <figure class="carousel-slide">
+              <img src="../images/sprint4/3.png" alt="Sistema de ressenyes i ratings" />
+            </figure>
+
+            <figure class="carousel-slide">
+              <img src="../images/sprint4/4.png" alt="Filtre de rutes aptes per cadira de rodes" />
+            </figure>
+
+            <figure class="carousel-slide">
+              <img src="../images/sprint4/5.png" alt="Sistema d'insígnies de l'aplicació" />
+            </figure>
+
+            <figure class="carousel-slide">
+              <img src="../images/sprint4/6.png" alt="Suggeriment de ruta amb IA" />
+            </figure>
+
+            <figure class="carousel-slide">
+              <img src="../images/sprint4/7.png" alt="Notificacions push amb Firebase Cloud Messaging" />
+            </figure>
+
+            <figure class="carousel-slide">
+              <img src="../images/sprint4/8.png" alt="Mapa general de rutes" />
+            </figure>
+          </div>
+
+          <button class="carousel-arrow prev" id="sprintCarouselPrev" aria-label="Imatge anterior"
+            type="button">&#8249;</button>
+
+          <button class="carousel-arrow next" id="sprintCarouselNext" aria-label="Imatge seguent"
+            type="button">&#8250;</button>
+
+          <div class="carousel-dots" id="sprintCarouselDots" aria-label="Navegacio del carrousel"></div>
+        </section>
+
+
+        <p class="subapartat" style="margin-top:24px"><strong>Captures del Sprint</strong><br />
+          Les captures de pantalla corresponents a les funcionalitats desenvolupades durant aquest sprint
+          s'afegiran més endavant. Quan estiguin disponibles, es podran incorporar al carrusel mantenint el
+          mateix format visual utilitzat en el Sprint 3.
+        </p>
+
+        <p class="subapartat"><strong>Metodologia i organització del Sprint</strong><br />
+          Hem continuat treballant seguint una metodologia àgil, repartint les tasques entre les diferents
+          parts del projecte: <strong>Backend</strong>, <strong>Backoffice</strong>, <strong>WebApp</strong>,
+          <strong>App mòbil</strong>, accessibilitat, monitoratge i integracions externes.
+        </p>
+
+        <p>
+          Aquest sprint ha estat especialment rellevant perquè hem afegit funcionalitats que fan que el projecte
+          sigui més complet, participatiu i accessible. La creació de rutes, les ressenyes, les insígnies,
+          les notificacions, el mapa general i el suggeriment amb IA milloren directament l'experiència de l'usuari.
+        </p>
+
+        <a class="back" href="../../../index.html">Tornar al blog</a>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    function formatDate(iso) {
+      if (!iso) return "";
+      const d = new Date(String(iso) + "T00:00:00");
+      return new Intl.DateTimeFormat("ca-ES", { year: "numeric", month: "long", day: "numeric" }).format(d);
+    }
+
+    function syncPostMetaFromJson() {
+      const fileName = decodeURIComponent(window.location.pathname.split("/").pop() || "").toLowerCase();
+      if (!fileName) return;
+
+      fetch("../../../posts.json", { cache: "no-store" })
+        .then(res => {
+          if (!res.ok) throw new Error("No s'ha pogut carregar posts.json");
+          return res.json();
+        })
+        .then(data => {
+          const list = Array.isArray(data) ? data : [];
+          const post = list.find(p => String((p && p.url) || "").trim().toLowerCase() === fileName);
+          if (!post) return;
+
+          const titleEl = document.querySelector("#postTitle");
+          if (titleEl && post.titol) titleEl.textContent = post.titol;
+          if (post.titol) document.title = post.titol;
+
+          const dateEl = document.querySelector("#postDate");
+          const formattedDate = formatDate(post.data);
+          if (dateEl && formattedDate) dateEl.textContent = `Data: ${formattedDate}`;
+
+          const tagsEl = document.querySelector("#postTags");
+          if (tagsEl) {
+            const tags = Array.isArray(post.etiquetes) ? post.etiquetes : [];
+            tagsEl.innerHTML = "";
+            if (!tags.length) {
+              const span = document.createElement("span");
+              span.className = "tag";
+              span.textContent = "sense etiqueta";
+              tagsEl.appendChild(span);
+            } else {
+              tags.forEach(t => {
+                const span = document.createElement("span");
+                span.className = "tag";
+                span.textContent = String(t);
+                tagsEl.appendChild(span);
+              });
+            }
+          }
+        })
+        .catch(() => { });
+    }
+
+    function initCarousel(prefix) {
+      const track = document.getElementById(`${prefix}Track`);
+      const dotsWrap = document.getElementById(`${prefix}Dots`);
+      const prevBtn = document.getElementById(`${prefix}Prev`);
+      const nextBtn = document.getElementById(`${prefix}Next`);
+      if (!track || !dotsWrap || !prevBtn || !nextBtn) return;
+
+      const slides = Array.from(track.children);
+      const total = slides.length;
+      if (!total) return;
+
+      let index = 0;
+      let timer = null;
+
+      function render() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        const dots = dotsWrap.querySelectorAll(".carousel-dot");
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === index);
+          dot.setAttribute("aria-current", i === index ? "true" : "false");
+        });
+      }
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "carousel-dot";
+        dot.setAttribute("aria-label", `Anar a la imatge ${i + 1}`);
+        dot.addEventListener("click", () => {
+          index = i;
+          render();
+          restartAuto();
+        });
+        dotsWrap.appendChild(dot);
+      });
+
+      prevBtn.addEventListener("click", () => {
+        index = (index - 1 + total) % total;
+        render();
+        restartAuto();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        index = (index + 1) % total;
+        render();
+        restartAuto();
+      });
+
+      render();
+
+      function startAuto() {
+        if (total <= 1) return;
+        timer = setInterval(() => {
+          index = (index + 1) % total;
+          render();
+        }, 5000);
+      }
+
+      function restartAuto() {
+        if (timer) clearInterval(timer);
+        startAuto();
+      }
+
+      startAuto();
+    }
+
+    syncPostMetaFromJson();
+    initCarousel("sprintCarousel");
+  </script>
+</body>
+
+</html>
